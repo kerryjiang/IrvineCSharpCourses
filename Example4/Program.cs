@@ -21,10 +21,21 @@ namespace Example4
                 names.Add(name);
             }
 
+            string maxName = string.Empty;
+            int maxLen = 0;
+
             foreach (var name in names)
             {
-                Console.WriteLine(name + ":" + name.Length);
+                var newMaxLen = Math.Max(name.Length, maxLen);
+
+                if (maxLen != newMaxLen)
+                {
+                    maxName = name;
+                    maxLen = newMaxLen;
+                }
             }
+
+            Console.WriteLine("The longest name is " + maxName + ", which has " + maxLen + " characters");
         }
     }
 }
