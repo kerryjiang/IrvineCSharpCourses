@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace GridLayoutDemo.iOS
+namespace LayoutViewsDemo.iOS
 {
     public class Application
     {

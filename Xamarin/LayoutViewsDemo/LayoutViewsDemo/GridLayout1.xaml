@@ -1,5 +1,17 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="LayoutViewsDemo.GridLayout1">
-	<ContentPage.Content>
-	</ContentPage.Content>
+	<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <BoxView Grid.Row="0" Grid.Column="0" BackgroundColor="Red"></BoxView>
+        <BoxView Grid.Row="0" Grid.Column="1" BackgroundColor="Green"></BoxView>
+        <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="Olive"></BoxView>
+        <BoxView Grid.Row="1" Grid.Column="1" BackgroundColor="Navy"></BoxView>
+    </Grid>
 </ContentPage>

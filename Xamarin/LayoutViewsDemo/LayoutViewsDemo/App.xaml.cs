@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace GridLayoutDemo
+namespace LayoutViewsDemo
 {
     public partial class App : Application
     {
@@ -8,7 +8,7 @@ namespace GridLayoutDemo
         {
             InitializeComponent();
 
-            MainPage = new GridLayoutDemoPage();
+            MainPage = new LayoutViewsDemoPage();
         }
 
         protected override void OnStart()
