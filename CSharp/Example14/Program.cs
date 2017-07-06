@@ -32,7 +32,22 @@ namespace Example14
                 newStudent.MathScore = mathScore;
 
                 dbContext.Students.Add(newStudent);
-                
+
+                dbContext.SaveChanges();
+            }
+        }
+
+        static void UpdateStudent(string firstName, string lastName, int englishScore, int mathScore)
+        {
+            using(var dbContext = new SchoolDbContext())
+            {
+                var student = dbContext.Students
+                    .Where(s => s.FirstName == firstName && s.LastName == lastName)
+                    .FirstOrDefault();
+
+                student.EnglishScore = englishScore;
+                student.MathScore = mathScore;                
+
                 dbContext.SaveChanges();
             }
         }
@@ -44,6 +59,9 @@ namespace Example14
             AddStudent("Debao", "Wang", 88, 99);
             AddStudent("Philips", "Zhang", 77, 98);
 
+            List();
+
+            UpdateStudent("Debao", "Wang", 100, 100);
             List();
 
             Console.ReadKey();
