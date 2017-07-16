@@ -1,0 +1,43 @@
+@model Example19.Models.Student
+
+<h2>@ViewData["Title"]</h2>
+ 
+<div> 
+    <hr /> 
+    <dl class="dl-horizontal"> 
+
+        <dt> 
+            @Html.DisplayNameFor(model => model.FirstName) 
+        </dt> 
+        <dd> 
+            @Html.DisplayFor(model => model.FirstName) 
+        </dd> 
+
+        <dt> 
+            @Html.DisplayNameFor(model => model.LastName) 
+        </dt> 
+        <dd> 
+            @Html.DisplayFor(model => model.LastName) 
+        </dd> 
+
+        <dt> 
+            @Html.DisplayNameFor(model => model.EnglishScore) 
+        </dt> 
+        <dd> 
+            @Html.DisplayFor(model => model.EnglishScore) 
+        </dd> 
+
+        <dt> 
+            @Html.DisplayNameFor(model => model.MathScore) 
+        </dt> 
+        <dd> 
+            @Html.DisplayFor(model => model.MathScore) 
+        </dd> 
+    </dl> 
+</div> 
+<form asp-action="Delete"> 
+    <div class="form-actions no-color"> 
+        <input type="submit" value="Delete" class="btn btn-default" /> | 
+        <a asp-controller="Home" asp-action="Index">Back to List</a> 
+    </div> 
+</form> 

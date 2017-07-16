@@ -1,0 +1,47 @@
+@model Example19.Models.Student
+
+<h2>@ViewData["Title"]</h2> 
+ 
+<form asp-action="Edit"> 
+    <div class="form-horizontal"> 
+        <h4>Edit</h4> 
+        <hr /> 
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+        <input type="hidden" asp-for="ID" />
+        <div class="form-group"> 
+            <label asp-for="FirstName" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="FirstName" class="form-control" />
+            </div> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="LastName" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="LastName" class="form-control" />
+            </div> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="EnglishScore" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="EnglishScore" class="form-control" /> 
+                <span asp-validation-for="EnglishScore" class="text-danger" /> 
+            </div> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="MathScore" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="MathScore" class="form-control" /> 
+                <span asp-validation-for="MathScore" class="text-danger" /> 
+            </div> 
+        </div> 
+        <div class="form-group"> 
+            <div class="col-md-offset-2 col-md-10"> 
+                <input type="submit" value="Save" class="btn btn-default" /> 
+            </div> 
+        </div> 
+    </div> 
+</form> 
+ 
+<div> 
+    <a asp-controller="Home" asp-action="Index">Back to List</a> 
+</div> 
