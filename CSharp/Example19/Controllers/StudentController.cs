@@ -9,7 +9,7 @@ namespace Example19.Controllers
 {
     public class StudentController : Controller
     {
-        public IActionResult View(int id)
+        public IActionResult Details(int id)
         {
             using (var db = new SchoolDbContext())
             {
