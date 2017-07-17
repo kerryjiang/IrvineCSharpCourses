@@ -13,8 +13,7 @@ namespace Example19.Controllers
             using (var db = new SchoolDbContext())
             {
                 return View(db.Students.ToArray());
-            }
-            
+            }            
         }
 
         public IActionResult About()
