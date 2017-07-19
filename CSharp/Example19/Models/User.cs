@@ -17,6 +17,7 @@ namespace Example19.Models
 
         [MaxLength(512)]
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [MaxLength(100)]
