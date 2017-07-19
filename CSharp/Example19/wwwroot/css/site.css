@@ -35,3 +35,13 @@ textarea {
         display: none;
     }
 }
+
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
+.input-validation-error {
+    background: pink;
+    border: 1px solid red;
+}

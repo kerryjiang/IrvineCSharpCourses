@@ -45,6 +45,11 @@ namespace Example19.Controllers
         [HttpPost]
         public IActionResult Edit(Student student)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(student);
+            }
+
             using (var db = new SchoolDbContext())
             {
                 var studentInDB = db.Students.FirstOrDefault(s => s.ID == student.ID);
@@ -109,6 +114,11 @@ namespace Example19.Controllers
         [HttpPost]
         public IActionResult Create(Student student)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(student);
+            }
+            
             using (var db = new SchoolDbContext())
             {
                 db.Students.Add(student);
