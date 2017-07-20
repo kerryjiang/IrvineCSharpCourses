@@ -22,7 +22,7 @@ namespace Example19.Controllers
             return View();
         }
 
-        private string HashPassword(string password)
+        public static string HashPassword(string password)
         {
             var sha1 = SHA1.Create();
             var data = Encoding.ASCII.GetBytes(password);
@@ -55,11 +55,14 @@ namespace Example19.Controllers
             claims.Add(new Claim(ClaimTypes.Name, user.UserName, ClaimValueTypes.String));
             claims.Add(new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email));
 
-            foreach (var role in user.Roles.Select(r => r.Role.Name).ToArray())
+            if (user.Roles != null && user.Roles.Any())
             {
-                claims.Add(new Claim(ClaimTypes.Role, role, ClaimValueTypes.String));
+                foreach (var role in user.Roles.Select(r => r.Role.Name).ToArray())
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role, ClaimValueTypes.String));
+                }
             }
-
+            
             var userIdentity = new ClaimsIdentity("Login");
             userIdentity.AddClaims(claims);
 
@@ -92,6 +95,34 @@ namespace Example19.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterUser user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            using (var db = new SchoolDbContext())
+            {
+                var newUser = new User();
+                newUser.UserName = user.UserName;
+                newUser.Password = HashPassword(user.Password);
+                newUser.DateCreated = newUser.DateUpdated = DateTime.Now;
+                newUser.Email = user.Email;
+                db.Users.Add(newUser);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Login");
         }
     }
 }

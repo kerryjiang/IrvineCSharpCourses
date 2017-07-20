@@ -1,8 +1,8 @@
-@model Example19.Models.LoginViewModel
+@model Example19.Models.RegisterUser
 
 <h2>Login</h2> 
  
-<form asp-action="Login"> 
+<form asp-action="Register"> 
     <div class="form-horizontal"> 
         <h4>Edit</h4> 
         <hr /> 
@@ -21,7 +21,21 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger" />
             </div> 
-        </div> 
+        </div>
+        <div class="form-group"> 
+            <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger" />
+            </div> 
+        </div>
+        <div class="form-group"> 
+            <label asp-for="Email" class="col-md-2 control-label"></label> 
+            <div class="col-md-10"> 
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div> 
+        </div>
         <div class="form-group"> 
             <div class="col-md-offset-2 col-md-10"> 
                 <input type="submit" value="Save" class="btn btn-default" /> 
@@ -31,7 +45,7 @@
 </form> 
  
 <div> 
-    <a asp-action="Register">Register</a> 
+    <a asp-action="Login">Login</a> 
 </div>
 
 @section Scripts {
