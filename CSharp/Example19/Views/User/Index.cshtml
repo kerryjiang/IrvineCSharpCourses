@@ -1,0 +1,45 @@
+@model IEnumerable<Example19.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>All Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            User Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Roles
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.UserName
+        </td>
+        <td>
+            @item.Email
+        </td>
+        <td>
+            @foreach (var r in item.Roles)
+            {
+                <span>@r.Role.Name</span>
+            }
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.ID">[Edit]</a>
+        </td>
+    </tr>
+}
+</table>
