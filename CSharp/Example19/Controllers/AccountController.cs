@@ -44,7 +44,7 @@ namespace Example19.Controllers
 
                 if (user == null || user.Password != HashPassword(loginInfo.Password))
                 {
-                    ModelState.AddModelError("", "Username or password incorrect");
+                    ModelState.AddModelError(string.Empty, "Username or password incorrect");
                     return View(loginInfo);
                 }
             }
