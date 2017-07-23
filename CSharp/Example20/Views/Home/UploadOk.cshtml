@@ -1,0 +1,19 @@
+﻿@model Example20.Models.UploadedFileViewModel
+
+@{
+    ViewData["Title"] = "You uploaded the image successfully";
+}
+
+
+@Model.Description
+
+<hr />
+
+<img src="@Model.ImageFile" />
+
+<hr />
+
+<img src="@Model.ImageFileThumbnail" />
+
+
+
