@@ -1,4 +1,4 @@
-@model Example19.Models.User
+@model Example19.Models.EditUserViewModel
 
 @{
     ViewData["Title"] = "Edit User";
@@ -26,9 +26,23 @@
             </div> 
         </div> 
         <div class="form-group"> 
-            <label asp-for="Roles" class="col-md-2 control-label"></label> 
+            <label asp-for="SelectedRoles" class="col-md-2 control-label"></label> 
             <div class="col-md-10"> 
-                
+                @foreach (var item in Model.AllRoles)
+                {
+                    <div>
+                        @if (item.Selected)
+                        {
+                            <input type="checkbox" name="SelectedRoles" value="@item.Value" checked="checked" class="checkbox-inline" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                        }
+
+                        <label class="control-label">@item.Text</label> 
+                    </div>
+                }
             </div> 
         </div> 
         <div class="form-group"> 
