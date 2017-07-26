@@ -16,6 +16,13 @@ namespace Example19.Controllers
 {
     public class AccountController : Controller
     {
+        private SchoolDbContext _schoolDbContext;
+
+        public AccountController(SchoolDbContext schoolDbContext)
+        {
+            _schoolDbContext = schoolDbContext;
+        }
+
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
@@ -38,15 +45,12 @@ namespace Example19.Controllers
 
             User user;
 
-            using (var db = new SchoolDbContext())
-            {
-                user = db.Users.FirstOrDefault(u => u.UserName == loginInfo.UserName || u.Email == loginInfo.UserName);
+            user = _schoolDbContext.Users.FirstOrDefault(u => u.UserName == loginInfo.UserName || u.Email == loginInfo.UserName);
 
-                if (user == null || user.Password != HashPassword(loginInfo.Password))
-                {
-                    ModelState.AddModelError(string.Empty, "Username or password incorrect");
-                    return View(loginInfo);
-                }
+            if (user == null || user.Password != HashPassword(loginInfo.Password))
+            {
+                ModelState.AddModelError(string.Empty, "Username or password incorrect");
+                return View(loginInfo);
             }
 
             var claims = new List<Claim>();
@@ -111,16 +115,13 @@ namespace Example19.Controllers
                 return View(user);
             }
 
-            using (var db = new SchoolDbContext())
-            {
-                var newUser = new User();
-                newUser.UserName = user.UserName;
-                newUser.Password = HashPassword(user.Password);
-                newUser.DateCreated = newUser.DateUpdated = DateTime.Now;
-                newUser.Email = user.Email;
-                db.Users.Add(newUser);
-                db.SaveChanges();
-            }
+            var newUser = new User();
+            newUser.UserName = user.UserName;
+            newUser.Password = HashPassword(user.Password);
+            newUser.DateCreated = newUser.DateUpdated = DateTime.Now;
+            newUser.Email = user.Email;
+            _schoolDbContext.Users.Add(newUser);
+            _schoolDbContext.SaveChanges();
 
             return RedirectToAction("Login");
         }

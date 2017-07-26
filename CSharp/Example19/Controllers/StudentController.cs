@@ -9,37 +9,36 @@ namespace Example19.Controllers
 {
     public class StudentController : Controller
     {
+        private SchoolDbContext _schoolDbContext;
+
+        public StudentController(SchoolDbContext schoolDbContext)
+        {
+            _schoolDbContext = schoolDbContext;
+        }
+
         public IActionResult Details(int id)
         {
-            using (var db = new SchoolDbContext())
-            {
-                var student = db.Students.FirstOrDefault(s => s.ID == id);
-                //var student = db.Students.Where(s => s.ID == id).FirstOrDefault();
+            var student = _schoolDbContext.Students.FirstOrDefault(s => s.ID == id);
 
-                if (student == null)
-                    return NotFound();
+            if (student == null)
+                return NotFound();
 
-                ViewData["Title"] = student.FirstName + " " + student.LastName;
+            ViewData["Title"] = student.FirstName + " " + student.LastName;
 
-                return View(student);
-            }
+            return View(student);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            using (var db = new SchoolDbContext())
-            {
-                var student = db.Students.FirstOrDefault(s => s.ID == id);
-                //var student = db.Students.Where(s => s.ID == id).FirstOrDefault();
+            var student = _schoolDbContext.Students.FirstOrDefault(s => s.ID == id);
 
-                if (student == null)
-                    return NotFound();
+            if (student == null)
+                return NotFound();
 
-                ViewData["Title"] = student.FirstName + " " + student.LastName + " - Edit";
+            ViewData["Title"] = student.FirstName + " " + student.LastName + " - Edit";
 
-                return View(student);
-            }
+            return View(student);
         }
 
         [HttpPost]
@@ -50,59 +49,48 @@ namespace Example19.Controllers
                 return View(student);
             }
 
-            using (var db = new SchoolDbContext())
-            {
-                var studentInDB = db.Students.FirstOrDefault(s => s.ID == student.ID);
+            var studentInDB = _schoolDbContext.Students.FirstOrDefault(s => s.ID == student.ID);
 
-                if (student == null)
-                    return NotFound();
+            if (student == null)
+                return NotFound();
 
-                studentInDB.FirstName = student.FirstName;
-                studentInDB.LastName = student.LastName;
-                studentInDB.MathScore = student.MathScore;
-                studentInDB.EnglishScore = student.EnglishScore;
+            studentInDB.FirstName = student.FirstName;
+            studentInDB.LastName = student.LastName;
+            studentInDB.MathScore = student.MathScore;
+            studentInDB.EnglishScore = student.EnglishScore;
 
-                db.SaveChanges();
+            _schoolDbContext.SaveChanges();
 
-                // return to the list page
-                return RedirectToAction("Index", "Home");
-            }
+            // return to the list page
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            using (var db = new SchoolDbContext())
-            {
-                var student = db.Students.FirstOrDefault(s => s.ID == id);
-                //var student = db.Students.Where(s => s.ID == id).FirstOrDefault();
+            var student = _schoolDbContext.Students.FirstOrDefault(s => s.ID == id);
 
-                if (student == null)
-                    return NotFound();
+            if (student == null)
+                return NotFound();
 
-                ViewData["Title"] = student.FirstName + " " + student.LastName + " - Delete";
+            ViewData["Title"] = student.FirstName + " " + student.LastName + " - Delete";
 
-                return View(student);
-            }
+            return View(student);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            using (var db = new SchoolDbContext())
-            {
-                var student = db.Students.FirstOrDefault(s => s.ID == id);
-                //var student = db.Students.Where(s => s.ID == id).FirstOrDefault();
+            var student = _schoolDbContext.Students.FirstOrDefault(s => s.ID == id);
 
-                if (student == null)
-                    return NotFound();
+            if (student == null)
+                return NotFound();
 
-                db.Students.Remove(student);
-                db.SaveChanges();
+            _schoolDbContext.Students.Remove(student);
+            _schoolDbContext.SaveChanges();
 
-                // return to the list page
-                return RedirectToAction("Index", "Home");
-            }
+            // return to the list page
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -119,14 +107,9 @@ namespace Example19.Controllers
                 return View(student);
             }
             
-            using (var db = new SchoolDbContext())
-            {
-                db.Students.Add(student);
-                db.SaveChanges();
-
-                // return to the list page
-                return RedirectToAction("Index", "Home");
-            }
+            _schoolDbContext.Students.Add(student);
+            _schoolDbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -8,12 +8,15 @@ namespace Example19.Controllers
 {
     public class HomeController : Controller
     {
+        private SchoolDbContext _schoolDbContext;
+
+        public HomeController(SchoolDbContext schoolDbContext)
+        {
+            _schoolDbContext = schoolDbContext;
+        }
         public IActionResult Index()
         {
-            using (var db = new SchoolDbContext())
-            {
-                return View(db.Students.ToArray());
-            }            
+            return View(_schoolDbContext.Students.ToArray());       
         }
 
         public IActionResult About()

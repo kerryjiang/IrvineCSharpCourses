@@ -6,11 +6,12 @@ using Example19.Models;
 
 namespace Example19
 {
-    class SchoolDbContext : DbContext
+    public class SchoolDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public SchoolDbContext(DbContextOptions<SchoolDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseMySQL("server=127.0.0.1;user id=root;password=123456;persistsecurityinfo=True;database=School;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
