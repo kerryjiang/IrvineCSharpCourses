@@ -8,6 +8,7 @@ using Example20.Models;
 using System.IO;
 using SkiaSharp;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Example20.Controllers
 {
@@ -118,6 +119,27 @@ namespace Example20.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public IActionResult SetCookie()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetCookie(string cookieValue)
+        {
+            //JsonConvert.SerializeObject();
+            Response.Cookies.Append("MySchool", "Woodbridge High");
+            return View();
+        }
+
+        public IActionResult GetCookie()
+        {
+            var schoolName = string.Empty;            
+            Request.Cookies.TryGetValue("MySchool", out schoolName);
+
+            return View(new { School = schoolName });
         }
     }
 }
