@@ -38,6 +38,8 @@ namespace SchoolApp
                     {
                         Students.Add(s);
                     }
+
+                    StudentCount = students.Count;
                 }
             }
         }

@@ -24,7 +24,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid BackgroundColor="Red" HorizontalOptions="Fill" VerticalOptions="Fill">
+                        <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
